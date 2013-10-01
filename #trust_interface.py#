@@ -1,0 +1,129 @@
+# Playing around with the time interface
+
+import Tkinter as tk
+from Tkinter import Tk
+import Image, ImageTk
+
+
+class Elicitation:
+
+    def __init__(self, master):
+
+        self.main = tk.Frame()
+        self.main.grid()
+        self.main.columnconfigure(0, weight =3)
+
+
+        self.left = tk.LabelFrame(self.main, text = "Option A", width = 400, height = 500)
+        self.left.grid(row = 0, column = 0, padx = 2, pady = 2)
+        self.left.grid_propagate(True)
+
+        self.bucket_img = Image.open("bucket.png")
+        self.bucket_pic = self.bucket_img.resize((500, 500), Image.ANTIALIAS)
+        self.bucket = ImageTk.PhotoImage(self.bucket_pic)
+        
+        self.bg_label = tk.Label(self.left, image = self.bucket)
+        self.bg_label.image = self.bucket
+        self.bg_label.grid(row = 1)
+
+        self.cb_l = tk.Checkbutton(self.left, text = "Choose A")
+        self.cb_l.grid(row = 0, sticky = 'N')
+
+
+        self.high_l = tk.Frame(self.bg_label)
+        self.high_l.grid(row = 1, sticky = 'S', column = 1)
+
+        self.low_l = tk.Frame(self.bg_label)
+        self.low_l.grid(row = 1, sticky = 'S', column = 2)
+
+
+
+
+        self.right = tk.LabelFrame(self.main, text = "Option B")
+        self.right.grid(padx = 2, pady = 2)
+
+
+
+        self.cb_r = tk.Checkbutton(self.right, text = "Choose B")
+        self.cb_r.grid(row = 0)
+
+
+        self.high_r = tk.Frame(self.right)
+        self.high_r.grid(row = 1, column = 0)
+
+        self.low_r = tk.Frame(self.right)
+        self.low_r.grid(row = 1, column = 1)
+
+        self.rupee_pic = Image.open("envelope.gif")
+        self.rupee_pic = self.rupee_pic.resize((70, 20), Image.ANTIALIAS)
+        self.rupee = ImageTk.PhotoImage(self.rupee_pic)
+
+
+#Black and white
+#        self.rupee_pic23 = self.rupee_pic2.convert('L')
+
+
+        frames = [self.high_l, self.low_l, self.high_r, self.low_r]
+        options = [5]*4
+
+        [self.show_rupee(frame, n) for frame, n in zip(frames, options)]
+
+
+
+        self.tab1 = tk.Label(self.left, text = '1000 euros, p; 500 euros')
+        self.tab2 = tk.Label(self.right, text = '1500 euros, p; 0 euros')
+        self.tab1.grid()
+        self.tab2.grid()
+
+        # self.canv = tk.Canvas(self.main, width = 250, 
+        #                       height = 350, background = "orange")
+        # self.canv.grid(row = 0, column = 0)
+        
+        # bob_cousin = self.canv.create_rectangle(0, 60, 250, 340, fill = "blue")
+        # bob = self.canv.create_oval(0, 0, 250, 125, fill = 'black')
+
+    def show_rupee(self, master, n):
+        for i in range(n):
+            self.l1 = tk.Label(master, image = self.rupee, text = 'euro 500',                               compound = tk.CENTER)
+            self.l1.image = self.rupee
+            self.l1.grid(padx = 3, pady = 3, sticky = 'N')
+
+        # for i in range(5 - n):
+        #     self.l5 = tk.Label(master, image = self.rupee2)
+        #     self.l5.image = self.rupee2
+        #     self.l5.grid(padx = 3, pady = 3, sticky = 'N')
+
+
+
+        # self.l2 = tk.Label(self.high_r, image = self.rupee)
+        # self.l2.image = self.rupee
+        # self.l2.grid(padx = 3, pady = 3)
+
+        # self.l3 = tk.Label(self.high_r, image = self.rupee)
+        # self.l3.image = self.rupee
+        # self.l3.grid(padx = 3, pady = 3)
+
+        # self.l4 = tk.Label(self.high_l, image = self.rupee)
+        # self.l4.image = self.rupee
+        # self.l4.grid(padx = 3, pady = 3)
+
+        # self.l5 = tk.Label(self.high_l, image = self.rupee)
+        # self.l5.image = self.rupee
+        # self.l5.grid(padx = 3, pady = 3)
+
+        # self.l6 = tk.Label(self.low_l, image = self.rupee)
+        # self.l6.image = self.rupee
+        # self.l6.grid(padx = 3, pady = 3)
+
+
+        # self.label = tk.Label(self.right, image = self.rupee)
+        # self.label = tk.Label(self.right, image = self.rupee)
+
+
+
+root = tk.Tk()
+root.geometry('+800+178')
+Elicitation(root)
+root.mainloop()
+
+print 'bob'

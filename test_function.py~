@@ -1,0 +1,7 @@
+
+
+def fill_probs(p):
+    if p > j:
+        print p
+
+    return None
